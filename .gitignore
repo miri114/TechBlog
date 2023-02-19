@@ -1,0 +1,9 @@
+blog/templates/add_blog_post.html
+
+env/
+logs
+logs/
+
+debug[a-z].log
+
+*.log
