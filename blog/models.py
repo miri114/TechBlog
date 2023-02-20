@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class Post(models.Model):
     title = models.CharField(max_length=300)
-    title_tag = models.CharField(max_length=300, default="donifix")
+    title_tag = models.CharField(max_length=300)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
 
@@ -14,6 +14,9 @@ class Post(models.Model):
         return self.title + ' | ' + str(self.author)
     
     def get_absolute_url(self):
-        return reverse('blog_detail', args=(str(self.id)))
-    
+        #after creating new post it will redirect us to the post we just created
+        # return reverse('blog_detail', args=(str(self.id)))
+        
+        ## we can just return to home with this 
+        return reverse('home')
 
