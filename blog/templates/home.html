@@ -5,11 +5,16 @@
 <h1>Post</h1>
 <ul>
     {% for post in object_list %}
+
     <li><a href="{% url 'blog_detail' post.pk %}">{{ post.title }} </a> - {{ post.author.first_name }}
-        {{ post.author.last_name }} - {{ post.blogpost_date }} <a href="{% url 'update_blog_post' post.pk %}">(Edit)</a>
+        {{ post.author.last_name }} - {{ post.blogpost_date }}
+        {% if user.is_authenticated and user.is_staff %}
+        <a href="{% url 'update_blog_post' post.pk %}">(Edit)</a>
         <a href="{% url 'delete_blog_post' post.pk %}">(Delete)</a><br />
-        {{ post.body }}
+        {% endif %}
+        {{ post.body|slice:":150"|safe }}
     </li>
+
     {% endfor %}
 </ul>
 {% endblock %}

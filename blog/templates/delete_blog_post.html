@@ -4,6 +4,7 @@
 
 {% block content %}
 
+{% if user.is_authenticated and user.is_staff %}
 <h1>Delete Post </h1>
 <br />
 <br />
@@ -16,4 +17,7 @@
         <button class="btn btn-danger">Delete</button>
     </form>
 </div>
+{% else %}
+<h1>Error 404... </h1>
+{% endif %}
 {% endblock %}
