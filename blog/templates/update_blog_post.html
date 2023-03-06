@@ -5,6 +5,7 @@
 {% block content %}
 
 {% if user.is_authenticated and user.is_staff %}
+{% if user.id == post.author.id %}
 <h1>Update Blog Post </h1>
 <br />
 <br />
@@ -16,6 +17,10 @@
         <button class="btn btn-secondary">Update</button>
     </form>
 </div>
+{% else %}
+<h1>Error 404</h1>
+{% endif %}
+
 {% else %}
 
 <h1>Error 404</h1>

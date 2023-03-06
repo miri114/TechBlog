@@ -2,6 +2,7 @@
 {% block title %}{{ post.title_tag }}{% endblock %}
 {% block content %}
 
+
 <h1>{{ post.title }}</h1>
 <small>By: {{ post.author.first_name }} {{ post.author.last_name}} - {{ post.blogpost_date }}</small><br />
 <hr />
@@ -12,8 +13,10 @@
 <br />
 <br />
 {% if user.is_authenticated and user.is_staff %}
+{% if user.id == post.author.id %}
 <a href="{% url 'update_blog_post' post.pk %}" class="btn btn-primary">Edit</a>
 <a href="{% url 'delete_blog_post' post.pk %}" class="btn btn-danger">Delete</a>
+{% endif %}
 {% endif %}
 <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
 {% endblock %}

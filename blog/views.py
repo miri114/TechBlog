@@ -10,9 +10,19 @@ class HomeView(ListView):
     template_name = 'home.html'
     ordering=['-blogpost_date']
 
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        context ["cat_menu"] = cat_menu
+        return context
+
 def CategoryView(request, catgs):
-    category_posts = Post.objects.filter(category=catgs)
-    return render(request, 'categories.html', {'catgs':catgs.title(), 'category_posts': category_posts })
+    category_posts = Post.objects.filter(category=catgs.replace('-',' '))
+    return render(request, 'categories.html', {'catgs':catgs.title().replace('-',' '), 'category_posts': category_posts })
+
+def CategoryListView(request):
+    catg_menu_list = Category.objects.all()
+    return render(request, 'category_list.html', {'catg_menu_list':catg_menu_list})
 
 class BlogDetailView(DetailView):
     model = Post
