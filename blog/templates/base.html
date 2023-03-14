@@ -27,9 +27,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'add_blog_post' %}">Add BlogPost</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
-                    </li>
                     {% endif %}
 
                     <!-- Category list html  -->
@@ -40,6 +37,15 @@
                             Categories
                         </a>
                         <ul class="dropdown-menu">
+                            {% if user.is_authenticated and user.is_staff %}
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="{% url 'add_category' %}">Add Category</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            {% endif %}
+
                             {% for item in cat_menu %}
                             <li><a class="dropdown-item" href="{% url 'category' item|slugify %}">
                                     {{ item }}
@@ -58,7 +64,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Profile
+                            {{ user.first_name }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a></li>
@@ -78,6 +84,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
                     </li> -->
+                    {% endif %}
+                </ul>
+
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
