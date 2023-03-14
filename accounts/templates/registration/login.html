@@ -11,8 +11,20 @@
 <div class="form-group">
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-secondary">Login</button>
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="id_username" name="username" placeholder="username">
+        </div>
+        <div class="mb-3">
+            <label for="id_password" class="form-label">Password</label>
+            <input type="password" class="form-control" required id="id_password" name="password"
+                placeholder="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<br />
+Not Registered Yet? SignUp <a href="{% url 'register' %}">Here</a>
+
 {% endblock %}
